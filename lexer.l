@@ -11,11 +11,13 @@ id ({letter}|_)({letter}|{digit}|_)*
 separator [ \t\n]
 lparent \(
 rparent \)
+comma ,
 
 %%
 {id} { printf("IDENTIFIER, \"%s\"\n", yytext); }
 {lparent} { printf("LPARENT, \"%s\"\n", yytext); }
 {rparent} { printf("RPARENT, \"%s\"\n", yytext); }
+{comma} { printf("COMMA, \"%s\"\n", yytext); }
 
 {separator}+
 %%
