@@ -18,20 +18,12 @@ and &&
 xor \^
 not !
 
-%{
-// Regular expression for a state machine for real number
-// from Compilers: Principles, Techniques, and Tools
-// (Second Edition, Diagram 3.16 on page 183)
-%}
-real_number {digit}+(\.{digit}+(E[+-]?{digit}+)?)?
-
 %%
 {id} { printf("IDENTIFIER, \"%s\"\n", yytext); }
 {lparent} { printf("LPARENT, \"%s\"\n", yytext); }
 {rparent} { printf("RPARENT, \"%s\"\n", yytext); }
 {comma} { printf("COMMA, \"%s\"\n", yytext); }
 {assign} { printf("ASSIGN, \"%s\"\n", yytext); }
-{real_number} { printf("ERROR, \"%s\"\n", yytext); }
 {or} { printf("LOR, \"%s\"\n", yytext); }
 {and} { printf("LAND, \"%s\"\n", yytext); }
 {xor} { printf("LXOR, \"%s\"\n", yytext); }
