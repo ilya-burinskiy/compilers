@@ -17,6 +17,7 @@ or \|\|
 and &&
 xor \^
 not !
+error_symbol [^a-zA-Z_\(\),=\|\^!&\r\n\t\f\v ]
 
 %%
 {id} { printf("IDENTIFIER, \"%s\"\n", yytext); }
@@ -28,6 +29,7 @@ not !
 {and} { printf("LAND, \"%s\"\n", yytext); }
 {xor} { printf("LXOR, \"%s\"\n", yytext); }
 {not} { printf("LNOT, \"%s\"\n", yytext); }
+{error_symbol}+ { printf("ERROR, \"%s\"\n", yytext); }
 
 {separator}+
 %%
