@@ -13,6 +13,7 @@ lparent \(
 rparent \)
 comma ,
 assign =
+or \|\|
 
 %{
 // Regular expression for a state machine for real number
@@ -28,6 +29,7 @@ real_number {digit}+(\.{digit}+(E[+-]?{digit}+)?)?
 {comma} { printf("COMMA, \"%s\"\n", yytext); }
 {assign} { printf("ASSIGN, \"%s\"\n", yytext); }
 {real_number} { printf("ERROR, \"%s\"\n", yytext); }
+{or} { printf("LOR, \"%s\"\n", yytext); }
 
 {separator}+
 %%
