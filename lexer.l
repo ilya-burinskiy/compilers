@@ -16,6 +16,7 @@ assign =
 or \|\|
 and &&
 xor \^
+not !
 
 %{
 // Regular expression for a state machine for real number
@@ -34,6 +35,7 @@ real_number {digit}+(\.{digit}+(E[+-]?{digit}+)?)?
 {or} { printf("LOR, \"%s\"\n", yytext); }
 {and} { printf("LAND, \"%s\"\n", yytext); }
 {xor} { printf("LXOR, \"%s\"\n", yytext); }
+{not} { printf("LNOT, \"%s\"\n", yytext); }
 
 {separator}+
 %%
