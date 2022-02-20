@@ -8,7 +8,7 @@
 letter [A-Za-z]
 digit [0-9]
 id ({letter}|_)({letter}|{digit}|_)*
-separator [ \t\n]
+separator [\r\n\t\f\v ]
 lparent \(
 rparent \)
 comma ,
