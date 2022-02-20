@@ -12,12 +12,14 @@ separator [ \t\n]
 lparent \(
 rparent \)
 comma ,
+assign =
 
 %%
 {id} { printf("IDENTIFIER, \"%s\"\n", yytext); }
 {lparent} { printf("LPARENT, \"%s\"\n", yytext); }
 {rparent} { printf("RPARENT, \"%s\"\n", yytext); }
 {comma} { printf("COMMA, \"%s\"\n", yytext); }
+{assign} { printf("ASSIGN, \"%s\"\n", yytext); }
 
 {separator}+
 %%
