@@ -19,8 +19,10 @@ xor \^
 not !
 error_symbol [^a-zA-Z_\(\),=\|\^!&\r\n\t\f\v ]
 true T
+false F
 
 %%
+{false} { printf("FALSE, \"%s\"\n", yytext); }
 {true} { printf("TRUE, \"%s\"\n", yytext); }
 {id} { printf("IDENTIFIER, \"%s\"\n", yytext); }
 {lparent} { printf("LPARENT, \"%s\"\n", yytext); }
