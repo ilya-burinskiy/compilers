@@ -5,9 +5,8 @@
 #define YY_DECL int scan_tokens()
 %}
 
-letter [A-Za-z]
 digit [0-9]
-id ({letter}|_)({letter}|{digit}|_)*
+id [[:alpha:]_][[:alnum:]_]*
 separator [\r\n\t\f\v ]
 lparent \(
 rparent \)
@@ -17,7 +16,7 @@ or \|\|
 and &&
 xor \^
 not !
-error_symbol [^a-zA-Z_\(\),=\|\^!&\r\n\t\f\v ]
+error_symbol [^[:alpha:]_\(\),=\|\^!&\r\n\t\f\v ]
 true T
 false F
 
