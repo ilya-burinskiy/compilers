@@ -1,4 +1,4 @@
-id2 = _identifier_123(,,)
+id2 = _identifier_123(To, Tk, T)
 || &&
 !ab ^ !cb
 @$+-[]a
@@ -6,3 +6,4 @@ id2 = _identifier_123(,,)
 234.0121
 1232.323E+100
 1232.323E123_df123+100
+True, T1, T
