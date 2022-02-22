@@ -465,8 +465,10 @@ char *yytext;
 #line 1 "lexer.l"
 #line 4 "lexer.l"
 #include <stdio.h>
+#include <stdlib.h>
+
 #define YY_DECL int scan_tokens()
-#line 470 "lexer.c"
+#line 472 "lexer.c"
 
 #define INITIAL 0
 
@@ -648,9 +650,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 22 "lexer.l"
+#line 24 "lexer.l"
 
-#line 654 "lexer.c"
+#line 656 "lexer.c"
 
 	if ( !(yy_init) )
 		{
@@ -735,76 +737,76 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 23 "lexer.l"
+#line 25 "lexer.l"
 { printf("FALSE, \"%s\"\n", yytext); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 24 "lexer.l"
+#line 26 "lexer.l"
 { printf("TRUE, \"%s\"\n", yytext); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 25 "lexer.l"
+#line 27 "lexer.l"
 { printf("IDENTIFIER, \"%s\"\n", yytext); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 26 "lexer.l"
+#line 28 "lexer.l"
 { printf("LPARENT, \"%s\"\n", yytext); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 27 "lexer.l"
+#line 29 "lexer.l"
 { printf("RPARENT, \"%s\"\n", yytext); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 28 "lexer.l"
+#line 30 "lexer.l"
 { printf("COMMA, \"%s\"\n", yytext); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 29 "lexer.l"
+#line 31 "lexer.l"
 { printf("ASSIGN, \"%s\"\n", yytext); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 30 "lexer.l"
+#line 32 "lexer.l"
 { printf("LOR, \"%s\"\n", yytext); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 31 "lexer.l"
+#line 33 "lexer.l"
 { printf("LAND, \"%s\"\n", yytext); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 32 "lexer.l"
+#line 34 "lexer.l"
 { printf("LXOR, \"%s\"\n", yytext); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 33 "lexer.l"
+#line 35 "lexer.l"
 { printf("LNOT, \"%s\"\n", yytext); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 34 "lexer.l"
+#line 36 "lexer.l"
 { printf("ERROR, \"%s\"\n", yytext); }
 	YY_BREAK
 case 13:
 /* rule 13 can match eol */
 YY_RULE_SETUP
-#line 36 "lexer.l"
+#line 38 "lexer.l"
 
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 37 "lexer.l"
+#line 39 "lexer.l"
 ECHO;
 	YY_BREAK
-#line 808 "lexer.c"
+#line 810 "lexer.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1801,15 +1803,30 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 37 "lexer.l"
+#line 39 "lexer.l"
 
 
+
+void scan_file(const char * fname);
 
 int main(int argc, char ** argv) {
   if (argc >= 2) {
-    yyin = fopen(argv[1], "r");
+    scan_file(argv[1]);
+  } else {
+    scan_tokens();
   }
-  scan_tokens();
   return 0;
+}
+
+void scan_file(const char * fname) {
+  FILE * fp = fopen(fname, "r");
+  if (!fp) {
+    perror("Can not open the file");
+    exit(1);
+  } else {
+    yy_switch_to_buffer(yy_create_buffer(fp,YY_BUF_SIZE));
+    scan_tokens();
+    fclose(fp);
+  }
 }
 
