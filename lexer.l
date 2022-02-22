@@ -35,3 +35,11 @@ false F
 
 {separator}+
 %%
+
+int main(int argc, char ** argv) {
+  if (argc >= 2) {
+    yyin = fopen(argv[1], "r");
+  }
+  scan_tokens();
+  return 0;
+}

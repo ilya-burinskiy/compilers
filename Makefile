@@ -1,8 +1,5 @@
-calculator: lexer.o calculator.o
-	gcc lexer.o calculator.o -o calculator
-
-calculator.o: calculator.c
-	gcc -c calculator.c
+calculator: lexer.o
+	gcc lexer.o -o calculator
 
 lexer.o: lexer.c
 	gcc -c lexer.c
