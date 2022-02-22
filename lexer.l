@@ -5,7 +5,6 @@
 #define YY_DECL int scan_tokens()
 %}
 
-digit [0-9]
 id [[:alpha:]_][[:alnum:]_]*
 separator [\r\n\t\f\v ]
 lparent \(
