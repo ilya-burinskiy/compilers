@@ -1,13 +1,13 @@
 .PHONY: clean
 
 calculator: lexer.o
-	gcc lexer.o -o calculator
+	gcc $^ -o $@
 
 lexer.o: lexer.c
-	gcc -c lexer.c
+	gcc -c $<
 
 lexer.c: lexer.l
-	flex --outfile=lexer.c lexer.l
+	flex --outfile=$*.c $*.l
 
 clean:
 	rm -f *.o
