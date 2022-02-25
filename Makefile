@@ -1,5 +1,8 @@
 .PHONY: clean
 
+vpath %.c src
+vpath %.l src
+
 calculator: lexer.o
 	gcc $^ -o $@
 
