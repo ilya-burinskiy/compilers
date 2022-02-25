@@ -1,3 +1,5 @@
+.PHONY: clean
+
 calculator: lexer.o
 	gcc lexer.o -o calculator
 
@@ -6,3 +8,6 @@ lexer.o: lexer.c
 
 lexer.c: lexer.l
 	flex --outfile=lexer.c lexer.l
+
+clean:
+	rm -f *.o
