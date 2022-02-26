@@ -3,8 +3,7 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
-
-#define YY_DECL int scan_tokens()
+#include "lexer.h"
 %}
 
 id [[:alpha:]_][[:alnum:]_]*
@@ -37,17 +36,6 @@ false F
 
 {separator}+
 %%
-
-void scan_file(const char * fname);
-
-int main(int argc, char ** argv) {
-  if (argc >= 2) {
-    scan_file(argv[1]);
-  } else {
-    scan_tokens();
-  }
-  return 0;
-}
 
 void scan_file(const char * fname) {
   FILE * fp = fopen(fname, "r");

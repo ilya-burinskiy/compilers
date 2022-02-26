@@ -1,16 +1,16 @@
 .PHONY: clean
 
-vpath %.c src
-vpath %.l src
-
-calculator: lexer.o
+calculator: lexer.o calculator.o
 	gcc $^ -o $@
 
-lexer.o: lexer.c
-	gcc -c $<
+calculator.o: src/calculator.c inc/lexer.h
+	gcc -c -I inc src/calculator.c
 
-lexer.c: lexer.l
-	flex --outfile=$*.c $*.l
+lexer.o: src/lexer.c inc/lexer.h
+	gcc -c -I inc src/lexer.c
+
+src/lexer.c: src/lexer.l inc/lexer.h
+	flex --outfile=src/lexer.c src/lexer.l
 
 clean:
 	rm -f *.o
