@@ -331,8 +331,6 @@ void yyfree (void *  );
 
 #define YY_AT_BOL() (YY_CURRENT_BUFFER_LVALUE->yy_at_bol)
 
-/* Begin user sect3 */
-
 #define yywrap(n) 1
 #define YY_SKIP_YYWRAP
 
@@ -467,7 +465,7 @@ char *yytext;
 #include <stdio.h>
 #include <stdlib.h>
 #include "lexer.h"
-#line 471 "src/lexer.c"
+#line 469 "src/lexer.c"
 
 #define INITIAL 0
 
@@ -651,7 +649,7 @@ YY_DECL
     
 #line 23 "src/lexer.l"
 
-#line 655 "src/lexer.c"
+#line 653 "src/lexer.c"
 
 	if ( !(yy_init) )
 		{
@@ -809,7 +807,7 @@ YY_RULE_SETUP
 #line 39 "src/lexer.l"
 ECHO;
 	YY_BREAK
-#line 813 "src/lexer.c"
+#line 811 "src/lexer.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1805,18 +1803,3 @@ void yyfree (void * ptr )
 #define YYTABLES_NAME "yytables"
 
 #line 39 "src/lexer.l"
-
-
-
-void scan_file(const char * fname) {
-  FILE * fp = fopen(fname, "r");
-  if (!fp) {
-    perror("Can not open the file");
-    exit(1);
-  } else {
-    yy_switch_to_buffer(yy_create_buffer(fp,YY_BUF_SIZE));
-    scan_tokens();
-    fclose(fp);
-  }
-}
-

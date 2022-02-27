@@ -36,16 +36,3 @@ false F
 
 {separator}+
 <<EOF>> { return EOF; }
-%%
-
-void scan_file(const char * fname) {
-  FILE * fp = fopen(fname, "r");
-  if (!fp) {
-    perror("Can not open the file");
-    exit(1);
-  } else {
-    yy_switch_to_buffer(yy_create_buffer(fp, YY_BUF_SIZE));
-    scan_tokens();
-    fclose(fp);
-  }
-}
