@@ -36,3 +36,4 @@ false F
 {error_symbol}+ { return ERROR; }
 
 {separator}+
+<<EOF>> { return END; }

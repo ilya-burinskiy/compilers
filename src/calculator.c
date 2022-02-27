@@ -6,7 +6,7 @@
 void scan_routine();
 
 int main(int argc, char ** argv) {
-  enum Token token = 0;
+  int token = 0;
 
   if (argc >= 2) {
     FILE * fp = fopen(argv[1], "r");
@@ -25,9 +25,9 @@ int main(int argc, char ** argv) {
 }
 
 void scan_routine() {
-  enum Token token = 0;
+  int token = 0;
   do {
-    token = scan_token();
+    token = yylex();
     printf("Token id: %d\n", token);
-  } while (token != 0);
+  } while (token != END);
 }
