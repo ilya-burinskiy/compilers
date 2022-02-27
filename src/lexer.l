@@ -35,6 +35,7 @@ false F
 {error_symbol}+ { printf("ERROR, \"%s\"\n", yytext); }
 
 {separator}+
+<<EOF>> { return EOF; }
 %%
 
 void scan_file(const char * fname) {
