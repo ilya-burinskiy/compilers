@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "lexer.h"
+#include "tokens.h"
 %}
 
 id [[:alpha:]_][[:alnum:]_]*
@@ -21,18 +22,17 @@ true T
 false F
 
 %%
-{false} { printf("FALSE, \"%s\"\n", yytext); }
-{true} { printf("TRUE, \"%s\"\n", yytext); }
-{id} { printf("IDENTIFIER, \"%s\"\n", yytext); }
-{lparent} { printf("LPARENT, \"%s\"\n", yytext); }
-{rparent} { printf("RPARENT, \"%s\"\n", yytext); }
-{comma} { printf("COMMA, \"%s\"\n", yytext); }
-{assign} { printf("ASSIGN, \"%s\"\n", yytext); }
-{or} { printf("LOR, \"%s\"\n", yytext); }
-{and} { printf("LAND, \"%s\"\n", yytext); }
-{xor} { printf("LXOR, \"%s\"\n", yytext); }
-{not} { printf("LNOT, \"%s\"\n", yytext); }
-{error_symbol}+ { printf("ERROR, \"%s\"\n", yytext); }
+{false} { return FALSE; }
+{true} { return TRUE; }
+{id} { return IDENTIFIER; }
+{lparent} { return LPARENT; }
+{rparent} { return RPARENT; }
+{comma} { return COMMA; }
+{assign} { return ASSIGN; }
+{or} { return LOR; }
+{and} { return LAND; }
+{xor} { return LXOR; }
+{not} { return LNOT; }
+{error_symbol}+ { return ERROR; }
 
 {separator}+
-<<EOF>> { return EOF; }

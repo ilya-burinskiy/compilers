@@ -465,7 +465,8 @@ char *yytext;
 #include <stdio.h>
 #include <stdlib.h>
 #include "lexer.h"
-#line 469 "src/lexer.c"
+#include "tokens.h"
+#line 470 "src/lexer.c"
 
 #define INITIAL 0
 
@@ -647,9 +648,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 23 "src/lexer.l"
+#line 24 "src/lexer.l"
 
-#line 653 "src/lexer.c"
+#line 654 "src/lexer.c"
 
 	if ( !(yy_init) )
 		{
@@ -734,80 +735,78 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 24 "src/lexer.l"
-{ printf("FALSE, \"%s\"\n", yytext); }
+#line 25 "src/lexer.l"
+{ return FALSE; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 25 "src/lexer.l"
-{ printf("TRUE, \"%s\"\n", yytext); }
+#line 26 "src/lexer.l"
+{ return TRUE; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 26 "src/lexer.l"
-{ printf("IDENTIFIER, \"%s\"\n", yytext); }
+#line 27 "src/lexer.l"
+{ return IDENTIFIER; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 27 "src/lexer.l"
-{ printf("LPARENT, \"%s\"\n", yytext); }
+#line 28 "src/lexer.l"
+{ return LPARENT; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 28 "src/lexer.l"
-{ printf("RPARENT, \"%s\"\n", yytext); }
+#line 29 "src/lexer.l"
+{ return RPARENT; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 29 "src/lexer.l"
-{ printf("COMMA, \"%s\"\n", yytext); }
+#line 30 "src/lexer.l"
+{ return COMMA; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 30 "src/lexer.l"
-{ printf("ASSIGN, \"%s\"\n", yytext); }
+#line 31 "src/lexer.l"
+{ return ASSIGN; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 31 "src/lexer.l"
-{ printf("LOR, \"%s\"\n", yytext); }
+#line 32 "src/lexer.l"
+{ return LOR; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 32 "src/lexer.l"
-{ printf("LAND, \"%s\"\n", yytext); }
+#line 33 "src/lexer.l"
+{ return LAND; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 33 "src/lexer.l"
-{ printf("LXOR, \"%s\"\n", yytext); }
+#line 34 "src/lexer.l"
+{ return LXOR; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 34 "src/lexer.l"
-{ printf("LNOT, \"%s\"\n", yytext); }
+#line 35 "src/lexer.l"
+{ return LNOT; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 35 "src/lexer.l"
-{ printf("ERROR, \"%s\"\n", yytext); }
+#line 36 "src/lexer.l"
+{ return ERROR; }
 	YY_BREAK
 case 13:
 /* rule 13 can match eol */
 YY_RULE_SETUP
-#line 37 "src/lexer.l"
-
-	YY_BREAK
-case YY_STATE_EOF(INITIAL):
 #line 38 "src/lexer.l"
-{ return EOF; }
+
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 39 "src/lexer.l"
 ECHO;
 	YY_BREAK
-#line 811 "src/lexer.c"
+#line 808 "src/lexer.c"
+case YY_STATE_EOF(INITIAL):
+	yyterminate();
 
 	case YY_END_OF_BUFFER:
 		{
