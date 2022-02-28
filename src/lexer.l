@@ -38,4 +38,3 @@ false F
 
 {new_line} { return NEW_LINE; }
 {separator}+
-<<EOF>> { return END; }

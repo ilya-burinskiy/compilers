@@ -51,8 +51,7 @@
      LXOR = 267,
      LNOT = 268,
      ERROR = 269,
-     NEW_LINE = 270,
-     END = 271
+     NEW_LINE = 270
    };
 #endif
 /* Tokens.  */
@@ -69,7 +68,6 @@
 #define LNOT 268
 #define ERROR 269
 #define NEW_LINE 270
-#define END 271
 
 
 

@@ -806,16 +806,14 @@ YY_RULE_SETUP
 #line 40 "src/lexer.l"
 
 	YY_BREAK
-case YY_STATE_EOF(INITIAL):
-#line 41 "src/lexer.l"
-{ return END; }
-	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 42 "src/lexer.l"
+#line 41 "src/lexer.l"
 ECHO;
 	YY_BREAK
-#line 819 "src/lexer.c"
+#line 815 "src/lexer.c"
+case YY_STATE_EOF(INITIAL):
+	yyterminate();
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1810,4 +1808,4 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 42 "src/lexer.l"
+#line 41 "src/lexer.l"
