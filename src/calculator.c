@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "lexer.h"
-
-int yyparse(void);
+#include "parser.h"
 
 int main(int argc, char ** argv) {
   if (argc >= 2) {

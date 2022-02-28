@@ -3,7 +3,7 @@
 bin/calculator: build/calculator.o build/parser.o build/lexer.o
 	gcc $^ -o $@
 
-build/calculator.o: src/calculator.c inc/lexer.h
+build/calculator.o: src/calculator.c inc/lexer.h inc/parser.h
 	gcc -c -I inc src/calculator.c -o build/calculator.o
 
 build/parser.o: src/parser.c
