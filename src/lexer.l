@@ -8,7 +8,8 @@
 %}
 
 id [[:alpha:]_][[:alnum:]_]*
-separator [\r\n\t\f\v ]
+separator [\r\t\f\v ]
+new_line \n
 lparent \(
 rparent \)
 comma ,
@@ -35,5 +36,6 @@ false F
 {not} { return LNOT; }
 {error_symbol}+ { return ERROR; }
 
+{new_line} { return NEW_LINE; }
 {separator}+
 <<EOF>> { return END; }

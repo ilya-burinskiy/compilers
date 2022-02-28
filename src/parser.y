@@ -19,6 +19,7 @@ void yyerror(const char * msg) {
 %token LXOR
 %token LNOT
 %token ERROR
+%token NEW_LINE
 %token END
 
 %left LOR LXOR
