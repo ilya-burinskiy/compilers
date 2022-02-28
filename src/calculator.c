@@ -6,8 +6,6 @@
 int yyparse(void);
 
 int main(int argc, char ** argv) {
-  int token = 0;
-
   if (argc >= 2) {
     FILE * fp = fopen(argv[1], "r");
     if (!fp) {
