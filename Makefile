@@ -12,10 +12,10 @@ build/parser.o: src/parser.c
 build/lexer.o: src/lexer.c inc/lexer.h inc/tokens.h
 	gcc -c -I inc src/lexer.c -o build/lexer.o
 
-src/lexer.c: src/lexer.l inc/lexer.h inc/tokens.h
+src/lexer.c: src/lexer.l
 	flex --outfile=src/lexer.c src/lexer.l
 
-inc/tokens.h src/parser.c: src/parser.y inc/lexer.h
+inc/tokens.h src/parser.c: src/parser.y
 	bison src/parser.y --defines=inc/tokens.h -o src/parser.c
 
 clean:
