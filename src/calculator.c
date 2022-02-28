@@ -3,6 +3,8 @@
 #include "tokens.h"
 #include "lexer.h"
 
+int yyparse(void);
+
 int main(int argc, char ** argv) {
   int token = 0;
 
@@ -13,9 +15,11 @@ int main(int argc, char ** argv) {
       exit(EXIT_FAILURE);
     } else {
       yy_switch_to_buffer(yy_create_buffer(fp, YY_BUF_SIZE));
+      yyparse();
       fclose(fp);
     }
   } else {
+    yyparse();
   }
   return 0;
 }

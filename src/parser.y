@@ -22,25 +22,35 @@ void yyerror(const char * msg) {
 %token NEW_LINE
 
 %left LOR LXOR
-%%
-statements : statements statement '\n'
-           | statements '\n'
-           | /* empty */
+%left LAND
 
-statement : IDENTIFIER ASSIGN expr
-          | expr
+%%
+stmts : stmts stmt NEW_LINE
+      | /* empty */
+      ;
+stmt : assign
+     | expr
+     ;
+assign : IDENTIFIER ASSIGN expr
+       ;
 expr : expr LOR expr
      | expr LXOR expr
      | expr LAND expr
-     | neg
+     | LNOT expr
      | call
      | TRUE
      | FALSE
      | IDENTIFIER
-
-neg : LNOT LPARENT expr RPARENT
+     | ERROR
+     | LPARENT expr RPARENT
+     ;
 call : IDENTIFIER LPARENT optparams RPARENT
-optparams : params | /* empty */
-params : params COMMA param | param
+     ;
+optparams : params
+          | /* empty */
+params : params COMMA param
+       | param
+       ;
 param : expr
+      ;
 %%
