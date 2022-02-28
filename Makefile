@@ -19,4 +19,4 @@ inc/tokens.h src/parser.c: src/parser.y inc/lexer.h
 	bison src/parser.y --defines=inc/tokens.h -o src/parser.c
 
 clean:
-	rm -f *.o
+	rm -f build/*.o
