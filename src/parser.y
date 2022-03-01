@@ -23,6 +23,7 @@ void yyerror(const char * msg) {
 
 %left LOR LXOR
 %left LAND
+%precedence LNOT
 
 %%
 stmts : stmts stmt NEW_LINE
