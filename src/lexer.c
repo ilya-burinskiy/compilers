@@ -167,7 +167,20 @@ extern FILE *yyin, *yyout;
 #define EOB_ACT_END_OF_FILE 1
 #define EOB_ACT_LAST_MATCH 2
 
-    #define YY_LESS_LINENO(n)
+    /* Note: We specifically omit the test for yy_rule_can_match_eol because it requires
+     *       access to the local variable yy_act. Since yyless() is a macro, it would break
+     *       existing scanners that call yyless() from OUTSIDE yylex. 
+     *       One obvious solution it to make yy_act a global. I tried that, and saw
+     *       a 5% performance hit in a non-yylineno scanner, because yy_act is
+     *       normally declared as a register variable-- so it is not worth it.
+     */
+    #define  YY_LESS_LINENO(n) \
+            do { \
+                yy_size_t yyl;\
+                for ( yyl = n; yyl < yyleng; ++yyl )\
+                    if ( yytext[yyl] == '\n' )\
+                        --yylineno;\
+            }while(0)
     
 /* Return all but the first "n" matched characters back to the input stream. */
 #define yyless(n) \
@@ -448,6 +461,11 @@ static yyconst flex_int16_t yy_chk[42] =
        23
     } ;
 
+/* Table of booleans, true if rule could match eol. */
+static yyconst flex_int32_t yy_rule_can_match_eol[16] =
+    {   0,
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,     };
+
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
 
@@ -463,11 +481,11 @@ int yy_flex_debug = 0;
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
 #line 1 "src/lexer.l"
-#line 4 "src/lexer.l"
+#line 5 "src/lexer.l"
 #include <stdio.h>
 #include <stdlib.h>
 #include "tokens.h"
-#line 471 "src/lexer.c"
+#line 489 "src/lexer.c"
 
 #define INITIAL 0
 
@@ -649,9 +667,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 24 "src/lexer.l"
+#line 25 "src/lexer.l"
 
-#line 655 "src/lexer.c"
+#line 673 "src/lexer.c"
 
 	if ( !(yy_init) )
 		{
@@ -723,6 +741,16 @@ yy_find_action:
 
 		YY_DO_BEFORE_ACTION;
 
+		if ( yy_act != YY_END_OF_BUFFER && yy_rule_can_match_eol[yy_act] )
+			{
+			yy_size_t yyl;
+			for ( yyl = 0; yyl < yyleng; ++yyl )
+				if ( yytext[yyl] == '\n' )
+					   
+    yylineno++;
+;
+			}
+
 do_action:	/* This label is used only to access EOF actions. */
 
 		switch ( yy_act )
@@ -736,81 +764,81 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 25 "src/lexer.l"
+#line 26 "src/lexer.l"
 { return FALSE; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 26 "src/lexer.l"
+#line 27 "src/lexer.l"
 { return TRUE; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 27 "src/lexer.l"
+#line 28 "src/lexer.l"
 { return IDENTIFIER; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 28 "src/lexer.l"
+#line 29 "src/lexer.l"
 { return LPARENT; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 29 "src/lexer.l"
+#line 30 "src/lexer.l"
 { return RPARENT; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 30 "src/lexer.l"
+#line 31 "src/lexer.l"
 { return COMMA; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 31 "src/lexer.l"
+#line 32 "src/lexer.l"
 { return ASSIGN; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 32 "src/lexer.l"
+#line 33 "src/lexer.l"
 { return LOR; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 33 "src/lexer.l"
+#line 34 "src/lexer.l"
 { return LAND; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 34 "src/lexer.l"
+#line 35 "src/lexer.l"
 { return LXOR; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 35 "src/lexer.l"
+#line 36 "src/lexer.l"
 { return LNOT; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 36 "src/lexer.l"
+#line 37 "src/lexer.l"
 { return ERROR; }
 	YY_BREAK
 case 13:
 /* rule 13 can match eol */
 YY_RULE_SETUP
-#line 38 "src/lexer.l"
+#line 39 "src/lexer.l"
 { return NEW_LINE; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 39 "src/lexer.l"
+#line 40 "src/lexer.l"
 
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 40 "src/lexer.l"
+#line 41 "src/lexer.l"
 ECHO;
 	YY_BREAK
-#line 814 "src/lexer.c"
+#line 842 "src/lexer.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1171,6 +1199,10 @@ static int yy_get_next_buffer (void)
 
 	*--yy_cp = (char) c;
 
+    if ( c == '\n' ){
+        --yylineno;
+    }
+
 	(yytext_ptr) = yy_bp;
 	(yy_hold_char) = *yy_cp;
 	(yy_c_buf_p) = yy_cp;
@@ -1245,6 +1277,11 @@ static int yy_get_next_buffer (void)
 	c = *(unsigned char *) (yy_c_buf_p);	/* cast for 8-bit char's */
 	*(yy_c_buf_p) = '\0';	/* preserve yytext */
 	(yy_hold_char) = *++(yy_c_buf_p);
+
+	if ( c == '\n' )
+		   
+    yylineno++;
+;
 
 	return c;
 }
@@ -1715,6 +1752,9 @@ static int yy_init_globals (void)
      * This function is called from yylex_destroy(), so don't allocate here.
      */
 
+    /* We do not touch yylineno unless the option is enabled. */
+    yylineno =  1;
+    
     (yy_buffer_stack) = 0;
     (yy_buffer_stack_top) = 0;
     (yy_buffer_stack_max) = 0;
@@ -1807,4 +1847,4 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 40 "src/lexer.l"
+#line 41 "src/lexer.l"

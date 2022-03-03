@@ -2,8 +2,10 @@
 #include <stdio.h>
 #include "lexer.h"
 
+int yyget_lineno(void);
+
 void yyerror(const char * msg) {
-  fprintf(stderr, "%s\n", msg);
+  fprintf(stderr, "In line %d: %s\n", yyget_lineno(), msg);
 }
 %}
 
@@ -42,7 +44,7 @@ expr : expr LOR expr
      | TRUE
      | FALSE
      | IDENTIFIER
-     | ERROR
+     | ERROR { yyerror("syntax error"); }
      | LPARENT expr RPARENT
      ;
 call : IDENTIFIER LPARENT optparams RPARENT
