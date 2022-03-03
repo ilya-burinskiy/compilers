@@ -70,6 +70,7 @@
 #line 1 "src/parser.y"
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "lexer.h"
 
 int yyget_lineno(void);
@@ -78,7 +79,7 @@ void yyerror(const char * msg) {
   fprintf(stderr, "In line %d: %s\n", yyget_lineno(), msg);
 }
 
-#line 82 "src/parser.c"
+#line 83 "src/parser.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -518,9 +519,9 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    31,    31,    32,    34,    35,    37,    39,    40,    41,
-      42,    43,    44,    45,    46,    47,    48,    50,    52,    53,
-      54,    55,    57
+       0,    32,    32,    33,    35,    36,    38,    40,    41,    42,
+      43,    44,    45,    46,    47,    48,    49,    51,    53,    54,
+      55,    56,    58
 };
 #endif
 
@@ -1098,13 +1099,13 @@ yyreduce:
   switch (yyn)
     {
   case 15: /* expr: ERROR  */
-#line 47 "src/parser.y"
-             { yyerror("syntax error"); }
-#line 1104 "src/parser.c"
+#line 48 "src/parser.y"
+             { yyerror("syntax error"); exit(EXIT_FAILURE); }
+#line 1105 "src/parser.c"
     break;
 
 
-#line 1108 "src/parser.c"
+#line 1109 "src/parser.c"
 
       default: break;
     }
@@ -1297,5 +1298,5 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 59 "src/parser.y"
+#line 60 "src/parser.y"
 

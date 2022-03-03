@@ -1,5 +1,6 @@
 %{
 #include <stdio.h>
+#include <stdlib.h>
 #include "lexer.h"
 
 int yyget_lineno(void);
@@ -44,7 +45,7 @@ expr : expr LOR expr
      | TRUE
      | FALSE
      | IDENTIFIER
-     | ERROR { yyerror("syntax error"); }
+     | ERROR { yyerror("syntax error"); exit(EXIT_FAILURE); }
      | LPARENT expr RPARENT
      ;
 call : IDENTIFIER LPARENT optparams RPARENT
