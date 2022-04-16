@@ -6,7 +6,7 @@ bin/calculator: build/calculator.o build/parser.o build/lexer.o
 build/calculator.o: src/calculator.c inc/lexer.h inc/parser.h
 	gcc -c -I inc src/calculator.c -o build/calculator.o
 
-build/parser.o: src/parser.c
+build/parser.o: src/parser.c inc/lexer.h
 	gcc -c -I inc src/parser.c -o build/parser.o
 
 build/lexer.o: src/lexer.c inc/lexer.h inc/tokens.h
