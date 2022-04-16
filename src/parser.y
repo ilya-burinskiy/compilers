@@ -3,8 +3,6 @@
 #include <stdlib.h>
 #include "lexer.h"
 
-int yyget_lineno(void);
-
 void yyerror(const char * msg) {
   fprintf(stderr, "In line %d: %s\n", yyget_lineno(), msg);
 }

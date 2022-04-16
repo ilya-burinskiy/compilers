@@ -11,6 +11,7 @@ typedef struct yy_buffer_state * YY_BUFFER_STATE;
 #endif
 
 YY_BUFFER_STATE yy_create_buffer(FILE * file, int size);
-void yy_switch_to_buffer(YY_BUFFER_STATE new_buffer);
 
+void yy_switch_to_buffer(YY_BUFFER_STATE new_buffer);
 int yylex(void);
+int yyget_lineno(void);
