@@ -519,7 +519,7 @@ static const yytype_int8 yyrline[] =
 {
        0,    30,    30,    31,    33,    34,    36,    38,    39,    40,
       41,    42,    43,    44,    45,    46,    47,    49,    51,    52,
-      53,    54,    56
+      54,    55,    57
 };
 #endif
 
@@ -1296,5 +1296,5 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 58 "src/parser.y"
+#line 59 "src/parser.y"
 

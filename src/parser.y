@@ -50,6 +50,7 @@ call : IDENTIFIER LPARENT optparams RPARENT
      ;
 optparams : params
           | /* empty */
+          ;
 params : params COMMA param
        | param
        ;
