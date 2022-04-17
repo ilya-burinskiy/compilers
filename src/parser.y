@@ -28,7 +28,7 @@ void yyerror(const char * msg) {
 
 %%
 stmts : stmts stmt NEW_LINE
-      | /* empty */
+      | %empty 
       ;
 stmt : assign
      | expr
@@ -49,7 +49,7 @@ expr : expr LOR expr
 call : IDENTIFIER LPARENT optparams RPARENT
      ;
 optparams : params
-          | /* empty */
+          | %empty
           ;
 params : params COMMA param
        | param
