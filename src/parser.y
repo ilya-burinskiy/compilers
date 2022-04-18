@@ -27,11 +27,10 @@ void yyerror(const char * msg) {
 %precedence LNOT
 
 %%
-stmts : stmts stmt NEW_LINE
-      | %empty 
-      ;
-stmt : assign
+stmt : stmt NEW_LINE stmt
+     | assign
      | expr
+     | %empty
      ;
 assign : IDENTIFIER ASSIGN expr
        ;
