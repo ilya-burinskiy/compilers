@@ -26,7 +26,10 @@ void yyerror(const char * msg) {
 %left LAND
 %precedence LNOT
 
+%start prog
 %%
+prog : stmt
+
 stmt : stmt NEW_LINE stmt
      | assign
      | expr
