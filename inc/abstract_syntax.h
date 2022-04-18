@@ -1,5 +1,10 @@
 #pragma once
 
-typedef struct Statement {
-  int lineno; /* temporary value */
-} Statement;
+struct Statement {
+  enum { COMPOUND_STMT } type;
+  union {
+    struct { struct Statement * stmt1, * stmt2; } compound;
+  } u;
+};
+
+typedef struct Statement Statement;
