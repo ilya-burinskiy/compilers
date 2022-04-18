@@ -2,8 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "lexer.h"
+#include "abstract_syntax.h"
 
-void yyerror(const char * msg) {
+void yyerror(Statement ** root, const char * msg) {
   fprintf(stderr, "In line %d: %s\n", yyget_lineno(), msg);
 }
 %}
@@ -13,6 +14,7 @@ void yyerror(const char * msg) {
 }
 
 %union { Statement * stmt; }
+%parse-param { Statement ** root }
 
 %token FALSE
 %token TRUE
@@ -51,7 +53,7 @@ expr : expr LOR expr
      | TRUE
      | FALSE
      | IDENTIFIER
-     | ERROR { yyerror("syntax error"); exit(EXIT_FAILURE); }
+     | ERROR { yyerror(root, "syntax error"); exit(EXIT_FAILURE); }
      | LPARENT expr RPARENT
      ;
 call : IDENTIFIER LPARENT optparams RPARENT

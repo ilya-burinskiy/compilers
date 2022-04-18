@@ -45,7 +45,7 @@
 extern int yydebug;
 #endif
 /* "%code requires" blocks.  */
-#line 11 "src/parser.y"
+#line 12 "src/parser.y"
 
   #include "abstract_syntax.h"
 
@@ -81,7 +81,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 15 "src/parser.y"
+#line 16 "src/parser.y"
  Statement * stmt; 
 
 #line 88 "inc/tokens.h"
@@ -96,7 +96,7 @@ typedef union YYSTYPE YYSTYPE;
 extern YYSTYPE yylval;
 
 
-int yyparse (void);
+int yyparse (Statement ** root);
 
 
 #endif /* !YY_YY_INC_TOKENS_H_INCLUDED  */

@@ -1,3 +1,4 @@
 #pragma once
+#include "abstract_syntax.h"
 
-int yyparse(void);
+int yyparse(Statement ** root);
