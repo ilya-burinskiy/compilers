@@ -44,6 +44,12 @@
 #if YYDEBUG
 extern int yydebug;
 #endif
+/* "%code requires" blocks.  */
+#line 11 "src/parser.y"
+
+  #include "abstract_syntax.h"
+
+#line 53 "inc/tokens.h"
 
 /* Token kinds.  */
 #ifndef YYTOKENTYPE
@@ -73,7 +79,15 @@ extern int yydebug;
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+union YYSTYPE
+{
+#line 15 "src/parser.y"
+ Statement * stmt; 
+
+#line 88 "inc/tokens.h"
+
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif

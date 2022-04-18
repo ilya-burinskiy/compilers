@@ -8,6 +8,12 @@ void yyerror(const char * msg) {
 }
 %}
 
+%code requires {
+  #include "abstract_syntax.h"
+}
+
+%union { Statement * stmt; }
+
 %token FALSE
 %token TRUE
 %token IDENTIFIER

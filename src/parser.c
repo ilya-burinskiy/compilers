@@ -517,9 +517,9 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    31,    31,    33,    34,    35,    36,    38,    40,    41,
-      42,    43,    44,    45,    46,    47,    48,    49,    51,    53,
-      54,    56,    57,    59
+       0,    37,    37,    39,    40,    41,    42,    44,    46,    47,
+      48,    49,    50,    51,    52,    53,    54,    55,    57,    59,
+      60,    62,    63,    65
 };
 #endif
 
@@ -1097,7 +1097,7 @@ yyreduce:
   switch (yyn)
     {
   case 16: /* expr: ERROR  */
-#line 48 "src/parser.y"
+#line 54 "src/parser.y"
              { yyerror("syntax error"); exit(EXIT_FAILURE); }
 #line 1103 "src/parser.c"
     break;
@@ -1296,5 +1296,5 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 61 "src/parser.y"
+#line 67 "src/parser.y"
 
