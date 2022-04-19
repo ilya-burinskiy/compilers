@@ -13,10 +13,11 @@ void yyerror(Statement ** root, const char * msg) {
   #include "abstract_syntax.h"
 }
 
-%union { Statement * stmt; }
+%union { Statement * stmt; Expression * expr; }
 %parse-param { Statement ** root }
 
 %type <stmt> stmt
+%type <expr> expr
 
 %token FALSE
 %token TRUE
@@ -61,15 +62,39 @@ stmt : stmt NEW_LINE stmt
 assign : IDENTIFIER ASSIGN expr
        ;
 expr : expr LOR expr
+     {
+       Expression * expr = (Expression *) malloc(sizeof(Expression));
+       expr->type = BINOP_EXPR;
+       expr->u.binop_expr.left = $1;
+       expr->u.binop_expr.binop = LOR_BINOP;
+       expr->u.binop_expr.right = $3;
+       $$ = expr;
+     }
      | expr LXOR expr
+     {
+       Expression * expr = (Expression *) malloc(sizeof(Expression));
+       expr->type = BINOP_EXPR;
+       expr->u.binop_expr.left = $1;
+       expr->u.binop_expr.binop = LXOR_BINOP;
+       expr->u.binop_expr.right = $3;
+       $$ = expr;
+     }
      | expr LAND expr
-     | LNOT expr
-     | call
-     | TRUE
-     | FALSE
-     | IDENTIFIER
+     {
+       Expression * expr = (Expression *) malloc(sizeof(Expression));
+       expr->type = BINOP_EXPR;
+       expr->u.binop_expr.left = $1;
+       expr->u.binop_expr.binop = LAND_BINOP;
+       expr->u.binop_expr.right = $3;
+       $$ = expr;
+     }
+     | LNOT expr { $$ = NULL; }
+     | call { $$ = NULL; }
+     | TRUE { $$ = NULL; }
+     | FALSE { $$ = NULL; }
+     | IDENTIFIER { $$ = NULL; }
      | ERROR { yyerror(root, "syntax error"); exit(EXIT_FAILURE); }
-     | LPARENT expr RPARENT
+     | LPARENT expr RPARENT { $$ = $2; }
      ;
 call : IDENTIFIER LPARENT optparams RPARENT
      ;

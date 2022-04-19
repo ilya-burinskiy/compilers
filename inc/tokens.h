@@ -82,7 +82,7 @@ extern int yydebug;
 union YYSTYPE
 {
 #line 16 "src/parser.y"
- Statement * stmt; 
+ Statement * stmt; Expression * expr; 
 
 #line 88 "inc/tokens.h"
 
