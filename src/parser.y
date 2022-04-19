@@ -56,7 +56,13 @@ stmt : stmt NEW_LINE stmt
        $$ = stmt;
      }
      | assign { $$ = NULL; }
-     | expr { $$ = NULL; }
+     | expr
+     {
+       Statement * stmt = (Statement *) malloc(sizeof(Statement));
+       stmt->type = EXPRESSION_STMT;
+       stmt->u.expr = $1;
+       $$ = stmt;
+     }
      | %empty { $$ = NULL; }
      ;
 assign : IDENTIFIER ASSIGN expr
