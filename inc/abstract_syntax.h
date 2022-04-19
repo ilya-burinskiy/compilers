@@ -1,9 +1,12 @@
 #pragma once
 
+struct Expression;
+
 struct Statement {
-  enum { COMPOUND_STMT } type;
+  enum { COMPOUND_STMT, EXPRESSION_STMT } type;
   union {
     struct { struct Statement * stmt1, * stmt2; } compound;
+    struct Expression * expr;
   } u;
 };
 
