@@ -16,6 +16,8 @@ void yyerror(Statement ** root, const char * msg) {
 %union { Statement * stmt; }
 %parse-param { Statement ** root }
 
+%type <stmt> stmt
+
 %token FALSE
 %token TRUE
 %token IDENTIFIER
@@ -42,12 +44,19 @@ Reduce derivation
 
 %start prog
 %%
-prog : stmt
+prog : stmt { *root = $1; }
 
 stmt : stmt NEW_LINE stmt
-     | assign
-     | expr
-     | %empty
+     {
+       Statement * stmt = (Statement *) malloc(sizeof(Statement));
+       stmt->type = COMPOUND_STMT;
+       stmt->u.compound.stmt1 = $1;
+       stmt->u.compound.stmt2 = $3;
+       $$ = stmt;
+     }
+     | assign { $$ = NULL; }
+     | expr { $$ = NULL; }
+     | %empty { $$ = NULL; }
      ;
 assign : IDENTIFIER ASSIGN expr
        ;

@@ -518,9 +518,9 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    45,    45,    47,    48,    49,    50,    52,    54,    55,
-      56,    57,    58,    59,    60,    61,    62,    63,    65,    67,
-      68,    70,    71,    73
+       0,    47,    47,    49,    57,    58,    59,    61,    63,    64,
+      65,    66,    67,    68,    69,    70,    71,    72,    74,    76,
+      77,    79,    80,    82
 };
 #endif
 
@@ -1099,14 +1099,50 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 16: /* expr: ERROR  */
-#line 62 "src/parser.y"
-             { yyerror(root, "syntax error"); exit(EXIT_FAILURE); }
+  case 2: /* prog: stmt  */
+#line 47 "src/parser.y"
+            { *root = (yyvsp[0].stmt); }
 #line 1106 "src/parser.c"
     break;
 
+  case 3: /* stmt: stmt NEW_LINE stmt  */
+#line 50 "src/parser.y"
+     {
+       Statement * stmt = (Statement *) malloc(sizeof(Statement));
+       stmt->type = COMPOUND_STMT;
+       stmt->u.compound.stmt1 = (yyvsp[-2].stmt);
+       stmt->u.compound.stmt2 = (yyvsp[0].stmt);
+       (yyval.stmt) = stmt;
+     }
+#line 1118 "src/parser.c"
+    break;
 
-#line 1110 "src/parser.c"
+  case 4: /* stmt: assign  */
+#line 57 "src/parser.y"
+              { (yyval.stmt) = NULL; }
+#line 1124 "src/parser.c"
+    break;
+
+  case 5: /* stmt: expr  */
+#line 58 "src/parser.y"
+            { (yyval.stmt) = NULL; }
+#line 1130 "src/parser.c"
+    break;
+
+  case 6: /* stmt: %empty  */
+#line 59 "src/parser.y"
+              { (yyval.stmt) = NULL; }
+#line 1136 "src/parser.c"
+    break;
+
+  case 16: /* expr: ERROR  */
+#line 71 "src/parser.y"
+             { yyerror(root, "syntax error"); exit(EXIT_FAILURE); }
+#line 1142 "src/parser.c"
+    break;
+
+
+#line 1146 "src/parser.c"
 
       default: break;
     }
@@ -1299,5 +1335,5 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 75 "src/parser.y"
+#line 84 "src/parser.y"
 
