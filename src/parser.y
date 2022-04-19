@@ -32,6 +32,12 @@ void yyerror(Statement ** root, const char * msg) {
 
 %left LOR LXOR
 %left LAND
+/* For preserving reduce derivation in case stmt NEW_LINE stmt • NEW_LINE
+Reduce derivation
+  stmt
+  ↳ 2: stmt                      NEW_LINE stmt
+        ↳ 2: stmt NEW_LINE stmt •          ↳ 2: ε */
+%left NEW_LINE
 %precedence LNOT
 
 %start prog
