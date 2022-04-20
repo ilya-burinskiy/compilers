@@ -1149,7 +1149,7 @@ yyreduce:
 
   case 11: /* expr: LNOT expr  */
 #line 60 "src/parser.y"
-                 { (yyval.expr) = NULL; }
+                 { (yyval.expr) = construct_unop_expr(LNOT_UNOP, (yyvsp[0].expr)); }
 #line 1154 "src/parser.c"
     break;
 

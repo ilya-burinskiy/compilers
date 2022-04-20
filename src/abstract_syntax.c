@@ -28,6 +28,15 @@ Expression * construct_binop_expr(Expression * expr1, BinOp binop, Expression * 
   return expr;
 }
 
+Expression * construct_unop_expr(UnOp unop, Expression * left) {
+  Expression * expr = (Expression *) malloc(sizeof(Expression));
+  expr->type = UNOP_EXPR;
+  expr->u.unop_expr.op = unop;
+  expr->u.unop_expr.left = left;
+
+  return expr;
+}
+
 Expression * construct_true_expr() {
   Expression * expr = (Expression *) malloc(sizeof(Expression));
   expr->type = TRUE_EXPR;

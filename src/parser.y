@@ -57,7 +57,7 @@ assign : IDENTIFIER ASSIGN expr
 expr : expr LOR expr { $$ = construct_binop_expr($1, LOR_BINOP, $3); }
      | expr LXOR expr { $$ = construct_binop_expr($1, LXOR_BINOP, $3); }
      | expr LAND expr { $$ = construct_binop_expr($1, LAND_BINOP, $3); }
-     | LNOT expr { $$ = NULL; }
+     | LNOT expr { $$ = construct_unop_expr(LNOT_UNOP, $2); }
      | call { $$ = NULL; }
      | TRUE { $$ = construct_true_expr(); }
      | FALSE { $$ = construct_false_expr(); }
