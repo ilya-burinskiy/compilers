@@ -17,3 +17,6 @@ typedef struct Expression {
     struct { struct Expression * left; enum BinOp binop; struct Expression * right; } binop_expr;
   } u;
 } Expression;
+
+Statement * construct_compound_stmt(Statement * stmt1, Statement * stmt2);
+Statement * construct_expression_stmt(Expression * expr);

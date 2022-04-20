@@ -47,22 +47,9 @@ Reduce derivation
 %%
 prog : stmt { *root = $1; }
 
-stmt : stmt NEW_LINE stmt
-     {
-       Statement * stmt = (Statement *) malloc(sizeof(Statement));
-       stmt->type = COMPOUND_STMT;
-       stmt->u.compound.stmt1 = $1;
-       stmt->u.compound.stmt2 = $3;
-       $$ = stmt;
-     }
+stmt : stmt NEW_LINE stmt { $$ = construct_compound_stmt($1, $3); }
      | assign { $$ = NULL; }
-     | expr
-     {
-       Statement * stmt = (Statement *) malloc(sizeof(Statement));
-       stmt->type = EXPRESSION_STMT;
-       stmt->u.expr = $1;
-       $$ = stmt;
-     }
+     | expr { $$ = construct_expression_stmt($1); }
      | %empty { $$ = NULL; }
      ;
 assign : IDENTIFIER ASSIGN expr

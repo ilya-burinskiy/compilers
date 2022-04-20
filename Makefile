@@ -1,7 +1,10 @@
 .PHONY: clean
 
-bin/calculator: build/calculator.o build/parser.o build/lexer.o
+bin/calculator: build/calculator.o build/parser.o build/lexer.o build/abstract_syntax.o
 	gcc $^ -o $@
+
+build/abstract_syntax.o: src/abstract_syntax.c inc/abstract_syntax.h
+	gcc -c -g -I inc src/abstract_syntax.c -o build/abstract_syntax.o
 
 build/calculator.o: src/calculator.c inc/lexer.h inc/parser.h inc/abstract_syntax.h
 	gcc -c -g -I inc src/calculator.c -o build/calculator.o
