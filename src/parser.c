@@ -518,9 +518,9 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    48,    48,    50,    51,    52,    53,    55,    57,    66,
-      75,    84,    85,    86,    92,    98,    99,   100,   102,   104,
-     105,   107,   108,   110
+       0,    48,    48,    50,    51,    52,    53,    55,    57,    58,
+      59,    60,    61,    62,    63,    64,    65,    66,    68,    70,
+      71,    73,    74,    76
 };
 #endif
 
@@ -1130,96 +1130,67 @@ yyreduce:
     break;
 
   case 8: /* expr: expr LOR expr  */
-#line 58 "src/parser.y"
-     {
-       Expression * expr = (Expression *) malloc(sizeof(Expression));
-       expr->type = BINOP_EXPR;
-       expr->u.binop_expr.left = (yyvsp[-2].expr);
-       expr->u.binop_expr.binop = LOR_BINOP;
-       expr->u.binop_expr.right = (yyvsp[0].expr);
-       (yyval.expr) = expr;
-     }
-#line 1143 "src/parser.c"
+#line 57 "src/parser.y"
+                     { (yyval.expr) = construct_binop_expr((yyvsp[-2].expr), LOR_BINOP, (yyvsp[0].expr)); }
+#line 1136 "src/parser.c"
     break;
 
   case 9: /* expr: expr LXOR expr  */
-#line 67 "src/parser.y"
-     {
-       Expression * expr = (Expression *) malloc(sizeof(Expression));
-       expr->type = BINOP_EXPR;
-       expr->u.binop_expr.left = (yyvsp[-2].expr);
-       expr->u.binop_expr.binop = LXOR_BINOP;
-       expr->u.binop_expr.right = (yyvsp[0].expr);
-       (yyval.expr) = expr;
-     }
-#line 1156 "src/parser.c"
+#line 58 "src/parser.y"
+                      { (yyval.expr) = construct_binop_expr((yyvsp[-2].expr), LXOR_BINOP, (yyvsp[0].expr)); }
+#line 1142 "src/parser.c"
     break;
 
   case 10: /* expr: expr LAND expr  */
-#line 76 "src/parser.y"
-     {
-       Expression * expr = (Expression *) malloc(sizeof(Expression));
-       expr->type = BINOP_EXPR;
-       expr->u.binop_expr.left = (yyvsp[-2].expr);
-       expr->u.binop_expr.binop = LAND_BINOP;
-       expr->u.binop_expr.right = (yyvsp[0].expr);
-       (yyval.expr) = expr;
-     }
-#line 1169 "src/parser.c"
+#line 59 "src/parser.y"
+                      { (yyval.expr) = construct_binop_expr((yyvsp[-2].expr), LAND_BINOP, (yyvsp[0].expr)); }
+#line 1148 "src/parser.c"
     break;
 
   case 11: /* expr: LNOT expr  */
-#line 84 "src/parser.y"
+#line 60 "src/parser.y"
                  { (yyval.expr) = NULL; }
-#line 1175 "src/parser.c"
+#line 1154 "src/parser.c"
     break;
 
   case 12: /* expr: call  */
-#line 85 "src/parser.y"
+#line 61 "src/parser.y"
             { (yyval.expr) = NULL; }
-#line 1181 "src/parser.c"
+#line 1160 "src/parser.c"
     break;
 
   case 13: /* expr: TRUE  */
-#line 87 "src/parser.y"
-     {
-       Expression * expr = (Expression *) malloc(sizeof(Expression));
-       expr->type = TRUE_EXPR;
-       (yyval.expr) = expr;
-     }
-#line 1191 "src/parser.c"
+#line 62 "src/parser.y"
+            { (yyval.expr) = construct_true_expr(); }
+#line 1166 "src/parser.c"
     break;
 
   case 14: /* expr: FALSE  */
-#line 93 "src/parser.y"
-     {
-       Expression * expr = (Expression *) malloc(sizeof(Expression));
-       expr->type = FALSE_EXPR;
-       (yyval.expr) = expr;
-     }
-#line 1201 "src/parser.c"
+#line 63 "src/parser.y"
+             { (yyval.expr) = construct_false_expr(); }
+#line 1172 "src/parser.c"
     break;
 
   case 15: /* expr: IDENTIFIER  */
-#line 98 "src/parser.y"
+#line 64 "src/parser.y"
                   { (yyval.expr) = NULL; }
-#line 1207 "src/parser.c"
+#line 1178 "src/parser.c"
     break;
 
   case 16: /* expr: ERROR  */
-#line 99 "src/parser.y"
+#line 65 "src/parser.y"
              { yyerror(root, "syntax error"); exit(EXIT_FAILURE); }
-#line 1213 "src/parser.c"
+#line 1184 "src/parser.c"
     break;
 
   case 17: /* expr: LPARENT expr RPARENT  */
-#line 100 "src/parser.y"
+#line 66 "src/parser.y"
                             { (yyval.expr) = (yyvsp[-1].expr); }
-#line 1219 "src/parser.c"
+#line 1190 "src/parser.c"
     break;
 
 
-#line 1223 "src/parser.c"
+#line 1194 "src/parser.c"
 
       default: break;
     }
@@ -1412,5 +1383,5 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 112 "src/parser.y"
+#line 78 "src/parser.y"
 

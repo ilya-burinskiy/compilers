@@ -17,3 +17,27 @@ Statement * construct_expression_stmt(Expression * expr) {
 
   return stmt;
 }
+
+Expression * construct_binop_expr(Expression * expr1, BinOp binop, Expression * expr2) {
+  Expression * expr = (Expression *) malloc(sizeof(Expression));
+  expr->type = BINOP_EXPR;
+  expr->u.binop_expr.left = expr1;
+  expr->u.binop_expr.binop = binop;
+  expr->u.binop_expr.right = expr2;
+
+  return expr;
+}
+
+Expression * construct_true_expr() {
+  Expression * expr = (Expression *) malloc(sizeof(Expression));
+  expr->type = TRUE_EXPR;
+
+  return expr;
+}
+
+Expression * construct_false_expr() {
+  Expression * expr = (Expression *) malloc(sizeof(Expression));
+  expr->type = FALSE_EXPR;
+
+  return expr;
+}

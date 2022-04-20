@@ -20,3 +20,7 @@ typedef struct Expression {
 
 Statement * construct_compound_stmt(Statement * stmt1, Statement * stmt2);
 Statement * construct_expression_stmt(Expression * expr);
+
+Expression * construct_binop_expr(Expression * expr1, BinOp binop, Expression * expr2);
+Expression * construct_true_expr();
+Expression * construct_false_expr();

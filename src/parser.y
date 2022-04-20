@@ -54,47 +54,13 @@ stmt : stmt NEW_LINE stmt { $$ = construct_compound_stmt($1, $3); }
      ;
 assign : IDENTIFIER ASSIGN expr
        ;
-expr : expr LOR expr
-     {
-       Expression * expr = (Expression *) malloc(sizeof(Expression));
-       expr->type = BINOP_EXPR;
-       expr->u.binop_expr.left = $1;
-       expr->u.binop_expr.binop = LOR_BINOP;
-       expr->u.binop_expr.right = $3;
-       $$ = expr;
-     }
-     | expr LXOR expr
-     {
-       Expression * expr = (Expression *) malloc(sizeof(Expression));
-       expr->type = BINOP_EXPR;
-       expr->u.binop_expr.left = $1;
-       expr->u.binop_expr.binop = LXOR_BINOP;
-       expr->u.binop_expr.right = $3;
-       $$ = expr;
-     }
-     | expr LAND expr
-     {
-       Expression * expr = (Expression *) malloc(sizeof(Expression));
-       expr->type = BINOP_EXPR;
-       expr->u.binop_expr.left = $1;
-       expr->u.binop_expr.binop = LAND_BINOP;
-       expr->u.binop_expr.right = $3;
-       $$ = expr;
-     }
+expr : expr LOR expr { $$ = construct_binop_expr($1, LOR_BINOP, $3); }
+     | expr LXOR expr { $$ = construct_binop_expr($1, LXOR_BINOP, $3); }
+     | expr LAND expr { $$ = construct_binop_expr($1, LAND_BINOP, $3); }
      | LNOT expr { $$ = NULL; }
      | call { $$ = NULL; }
-     | TRUE
-     {
-       Expression * expr = (Expression *) malloc(sizeof(Expression));
-       expr->type = TRUE_EXPR;
-       $$ = expr;
-     }
-     | FALSE
-     {
-       Expression * expr = (Expression *) malloc(sizeof(Expression));
-       expr->type = FALSE_EXPR;
-       $$ = expr;
-     }
+     | TRUE { $$ = construct_true_expr(); }
+     | FALSE { $$ = construct_false_expr(); }
      | IDENTIFIER { $$ = NULL; }
      | ERROR { yyerror(root, "syntax error"); exit(EXIT_FAILURE); }
      | LPARENT expr RPARENT { $$ = $2; }
