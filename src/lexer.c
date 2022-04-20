@@ -775,7 +775,7 @@ YY_RULE_SETUP
 case 3:
 YY_RULE_SETUP
 #line 28 "src/lexer.l"
-{ return IDENTIFIER; }
+{ yylval.id = strdup(yytext); return IDENTIFIER; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP

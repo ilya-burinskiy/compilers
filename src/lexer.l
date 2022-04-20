@@ -25,7 +25,7 @@ false F
 %%
 {false} { return FALSE; }
 {true} { return TRUE; }
-{id} { return IDENTIFIER; }
+{id} { yylval.id = strdup(yytext); return IDENTIFIER; }
 {lparent} { return LPARENT; }
 {rparent} { return RPARENT; }
 {comma} { return COMMA; }

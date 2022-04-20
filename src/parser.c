@@ -1173,7 +1173,7 @@ yyreduce:
 
   case 15: /* expr: IDENTIFIER  */
 #line 64 "src/parser.y"
-                  { (yyval.expr) = NULL; }
+                  { (yyval.expr) = construct_id_expr((yyvsp[0].id)); }
 #line 1178 "src/parser.c"
     break;
 

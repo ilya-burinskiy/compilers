@@ -13,7 +13,7 @@ void yyerror(Statement ** root, const char * msg) {
   #include "abstract_syntax.h"
 }
 
-%union { Statement * stmt; Expression * expr; }
+%union { Statement * stmt; Expression * expr; char * id; }
 %parse-param { Statement ** root }
 
 %type <stmt> stmt
@@ -21,7 +21,7 @@ void yyerror(Statement ** root, const char * msg) {
 
 %token FALSE
 %token TRUE
-%token IDENTIFIER
+%token <id> IDENTIFIER
 %token LPARENT
 %token RPARENT
 %token COMMA
@@ -61,7 +61,7 @@ expr : expr LOR expr { $$ = construct_binop_expr($1, LOR_BINOP, $3); }
      | call { $$ = NULL; }
      | TRUE { $$ = construct_true_expr(); }
      | FALSE { $$ = construct_false_expr(); }
-     | IDENTIFIER { $$ = NULL; }
+     | IDENTIFIER { $$ = construct_id_expr($1); }
      | ERROR { yyerror(root, "syntax error"); exit(EXIT_FAILURE); }
      | LPARENT expr RPARENT { $$ = $2; }
      ;

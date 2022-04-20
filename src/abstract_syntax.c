@@ -37,6 +37,14 @@ Expression * construct_unop_expr(UnOp unop, Expression * left) {
   return expr;
 }
 
+Expression * construct_id_expr(char * str) {
+  Expression * expr = (Expression *) malloc(sizeof(Expression));
+  expr->type = ID_EXPR;
+  expr->u.id = str;
+
+  return expr;
+}
+
 Expression * construct_true_expr() {
   Expression * expr = (Expression *) malloc(sizeof(Expression));
   expr->type = TRUE_EXPR;
