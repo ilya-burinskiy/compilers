@@ -12,7 +12,7 @@ struct Statement {
 
 enum BinOp { LOR_BINOP, LXOR_BINOP, LAND_BINOP };
 struct Expression {
-  enum { BINOP_EXPR } type;
+  enum { BINOP_EXPR, TRUE_EXPR, FALSE_EXPR } type;
   union {
     struct { struct Expression * left; enum BinOp binop; struct Expression * right; } binop_expr;
   } u;

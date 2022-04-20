@@ -96,8 +96,18 @@ expr : expr LOR expr
      }
      | LNOT expr { $$ = NULL; }
      | call { $$ = NULL; }
-     | TRUE { $$ = NULL; }
-     | FALSE { $$ = NULL; }
+     | TRUE
+     {
+       Expression * expr = (Expression *) malloc(sizeof(Expression));
+       expr->type = TRUE_EXPR;
+       $$ = expr;
+     }
+     | FALSE
+     {
+       Expression * expr = (Expression *) malloc(sizeof(Expression));
+       expr->type = FALSE_EXPR;
+       $$ = expr;
+     }
      | IDENTIFIER { $$ = NULL; }
      | ERROR { yyerror(root, "syntax error"); exit(EXIT_FAILURE); }
      | LPARENT expr RPARENT { $$ = $2; }
