@@ -46,7 +46,7 @@ Reduce derivation
 %start prog
 %%
 prog : stmt { *root = $1; }
-
+     ;
 stmt : stmt NEW_LINE stmt { $$ = construct_compound_stmt($1, $3); }
      | assign { $$ = NULL; }
      | expr { $$ = construct_expression_stmt($1); }
