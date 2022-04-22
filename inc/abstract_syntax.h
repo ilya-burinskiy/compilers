@@ -22,6 +22,14 @@ typedef struct Expression {
   } u;
 } Expression;
 
+typedef struct Param {
+  enum { COMPOUND_PARAM, SIMPLE_PARAM } type;
+  union {
+    struct { struct Param * param1, * param2; } compound_parm;
+    Expression * expr;
+  } u;
+} Param;
+
 Statement * construct_compound_stmt(Statement * stmt1, Statement * stmt2);
 Statement * construct_expression_stmt(Expression * expr);
 
@@ -30,3 +38,6 @@ Expression * construct_unop_expr(UnOp unop, Expression * expr);
 Expression * construct_id_expr(char * str);
 Expression * construct_true_expr();
 Expression * construct_false_expr();
+
+Param * construct_compound_param(Param * param1, Param * param2);
+Param * construct_simple_param(Expression * expr);

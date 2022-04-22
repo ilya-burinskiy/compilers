@@ -58,3 +58,20 @@ Expression * construct_false_expr() {
 
   return expr;
 }
+
+Param * construct_compound_param(Param * param1, Param * param2) {
+  Param * param = (Param *) malloc(sizeof(Param));
+  param->type = COMPOUND_PARAM;
+  param->u.compound_parm.param1 = param1;
+  param->u.compound_parm.param2 = param2;
+
+  return param;
+}
+
+Param * construct_simple_param(Expression * expr) {
+  Param * param = (Param *) malloc(sizeof(Param));
+  param->type = SIMPLE_PARAM;
+  param->u.expr = expr;
+
+  return param;
+}
