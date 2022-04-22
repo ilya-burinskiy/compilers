@@ -30,6 +30,11 @@ typedef struct Param {
   } u;
 } Param;
 
+typedef struct Call {
+  char * id;
+  Param * params;
+} Call;
+
 Statement * construct_compound_stmt(Statement * stmt1, Statement * stmt2);
 Statement * construct_expression_stmt(Expression * expr);
 
@@ -41,3 +46,5 @@ Expression * construct_false_expr();
 
 Param * construct_compound_param(Param * param1, Param * param2);
 Param * construct_simple_param(Expression * expr);
+
+Call * construct_call(char * id, Param * params);

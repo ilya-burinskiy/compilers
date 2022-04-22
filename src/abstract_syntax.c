@@ -75,3 +75,11 @@ Param * construct_simple_param(Expression * expr) {
 
   return param;
 }
+
+Call * construct_call(char * id, Param * params) {
+  Call * call = (Call *) malloc(sizeof(Call));
+  call->id = id;
+  call->params = params;
+
+  return call;
+}
