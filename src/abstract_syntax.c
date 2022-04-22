@@ -45,6 +45,14 @@ Expression * construct_id_expr(char * str) {
   return expr;
 }
 
+Expression * construct_call_expr(Call * call) {
+  Expression * expr = (Expression *) malloc(sizeof(Expression));
+  expr->type = CALL_EXPR;
+  expr->u.call = call;
+
+  return expr;
+}
+
 Expression * construct_true_expr() {
   Expression * expr = (Expression *) malloc(sizeof(Expression));
   expr->type = TRUE_EXPR;
