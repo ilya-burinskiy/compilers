@@ -18,6 +18,15 @@ Statement * construct_expression_stmt(Expression * expr) {
   return stmt;
 }
 
+Statement * construct_assign_stmt(char * id, Expression * expr) {
+  Statement * stmt = (Statement *) malloc(sizeof(Statement));
+  stmt->type = ASSIGN_STMT;
+  stmt->u.assign.id = id;
+  stmt->u.assign.expr = expr;
+
+  return stmt;
+}
+
 Expression * construct_binop_expr(Expression * expr1, BinOp binop, Expression * expr2) {
   Expression * expr = (Expression *) malloc(sizeof(Expression));
   expr->type = BINOP_EXPR;

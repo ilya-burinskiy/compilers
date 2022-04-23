@@ -4,9 +4,10 @@ struct Expression;
 struct Call;
 
 typedef struct Statement {
-  enum { COMPOUND_STMT, EXPRESSION_STMT } type;
+  enum { COMPOUND_STMT, EXPRESSION_STMT, ASSIGN_STMT } type;
   union {
     struct { struct Statement * stmt1, * stmt2; } compound;
+    struct { char * id; struct Expression * expr; } assign;
     struct Expression * expr;
   } u;
 } Statement;
@@ -39,6 +40,7 @@ typedef struct Call {
 
 Statement * construct_compound_stmt(Statement * stmt1, Statement * stmt2);
 Statement * construct_expression_stmt(Expression * expr);
+Statement * construct_assign_stmt(char * id, Expression * expr);
 
 Expression * construct_binop_expr(Expression * expr1, BinOp binop, Expression * expr2);
 Expression * construct_unop_expr(UnOp unop, Expression * expr);

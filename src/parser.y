@@ -16,7 +16,7 @@ void yyerror(Statement ** root, const char * msg) {
 %union { Statement * stmt; Expression * expr; Call * call; Param * param; char * id; }
 %parse-param { Statement ** root }
 
-%type <stmt> stmt
+%type <stmt> stmt assign
 %type <expr> expr
 %type <call> call
 %type <param> optparams params param
@@ -50,11 +50,11 @@ Reduce derivation
 prog : stmt { *root = $1; }
      ;
 stmt : stmt NEW_LINE stmt { $$ = construct_compound_stmt($1, $3); }
-     | assign { $$ = NULL; }
+     | assign { $$ = $1; }
      | expr { $$ = construct_expression_stmt($1); }
      | %empty { $$ = NULL; }
      ;
-assign : IDENTIFIER ASSIGN expr
+assign : IDENTIFIER ASSIGN expr { $$ = construct_assign_stmt($1, $3); }
        ;
 expr : expr LOR expr { $$ = construct_binop_expr($1, LOR_BINOP, $3); }
      | expr LXOR expr { $$ = construct_binop_expr($1, LXOR_BINOP, $3); }
