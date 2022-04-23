@@ -1,9 +1,4 @@
 id2 = _identifier_123(To, Tk, T, False, F)
 F || (id2 && T)
 !ab ^ !cb
-@$+-[] && a
-123.0
-234.0121
-1232.323
-1232.323 || E123_df123 && 100
 call(True, T1, T)
