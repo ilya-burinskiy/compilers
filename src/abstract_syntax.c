@@ -54,10 +54,11 @@ Expression * construct_id_expr(char * str) {
   return expr;
 }
 
-Expression * construct_call_expr(Call * call) {
+Expression * construct_call_expr(char * id, Param * params) {
   Expression * expr = (Expression *) malloc(sizeof(Expression));
   expr->type = CALL_EXPR;
-  expr->u.call = call;
+  expr->u.call_expr.id = id;
+  expr->u.call_expr.params = params;
 
   return expr;
 }
@@ -91,12 +92,4 @@ Param * construct_simple_param(Expression * expr) {
   param->u.expr = expr;
 
   return param;
-}
-
-Call * construct_call(char * id, Param * params) {
-  Call * call = (Call *) malloc(sizeof(Call));
-  call->id = id;
-  call->params = params;
-
-  return call;
 }

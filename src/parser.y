@@ -13,12 +13,11 @@ void yyerror(Statement ** root, const char * msg) {
   #include "abstract_syntax.h"
 }
 
-%union { Statement * stmt; Expression * expr; Call * call; Param * param; char * id; }
+%union { Statement * stmt; Expression * expr; Param * param; char * id; }
 %parse-param { Statement ** root }
 
 %type <stmt> stmt assign
-%type <expr> expr
-%type <call> call
+%type <expr> expr call
 %type <param> optparams params param
 
 %token FALSE
@@ -60,14 +59,14 @@ expr : expr LOR expr { $$ = construct_binop_expr($1, LOR_BINOP, $3); }
      | expr LXOR expr { $$ = construct_binop_expr($1, LXOR_BINOP, $3); }
      | expr LAND expr { $$ = construct_binop_expr($1, LAND_BINOP, $3); }
      | LNOT expr { $$ = construct_unop_expr(LNOT_UNOP, $2); }
-     | call { $$ = construct_call_expr($1); }
+     | call { $$ = $1; }
      | TRUE { $$ = construct_true_expr(); }
      | FALSE { $$ = construct_false_expr(); }
      | IDENTIFIER { $$ = construct_id_expr($1); }
      | ERROR { yyerror(root, "syntax error"); exit(EXIT_FAILURE); }
      | LPARENT expr RPARENT { $$ = $2; }
      ;
-call : IDENTIFIER LPARENT optparams RPARENT { $$ = construct_call($1, $3); }
+call : IDENTIFIER LPARENT optparams RPARENT { $$ = construct_call_expr($1, $3); }
      ;
 optparams : params { $$ = $1; }
           | %empty { $$ = NULL; }
