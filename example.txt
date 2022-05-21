@@ -1,4 +1,4 @@
 id2 = _identifier_123(To, Tk, T, False, F)
 F || (id2 && T)
 !ab ^ !cb
-call(True, T1, T)
+call((True || False), T1 || F, T)
