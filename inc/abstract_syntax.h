@@ -1,9 +1,32 @@
 #pragma once
 
+typedef enum StatementType {
+  COMPOUND_STMT, EXPRESSION_STMT, ASSIGN_STMT
+} StatementType;
+
+typedef enum BinOp {
+  LOR_BINOP = (int) ASSIGN_STMT + 1,
+  LXOR_BINOP, LAND_BINOP
+} BinOp;
+
+typedef enum UnOp {
+  LNOT_UNOP = (int) LAND_BINOP + 1
+} UnOp;
+
+typedef enum ExpressionType {
+  BINOP_EXPR = (int) LNOT_UNOP + 1,
+  UNOP_EXPR, ID_EXPR, TRUE_EXPR, FALSE_EXPR,
+  CALL_EXPR
+} ExpressionType;
+
+typedef enum ParamType {
+  COMPOUND_PARAM = (int) CALL_EXPR + 1, SIMPLE_PARAM
+} ParamType;
+
 struct Expression;
 
 typedef struct Statement {
-  enum { COMPOUND_STMT, EXPRESSION_STMT, ASSIGN_STMT } type;
+  StatementType type;
   union {
     struct { struct Statement * stmt1, * stmt2; } compound;
     struct { char * id; struct Expression * expr; } assign;
@@ -11,15 +34,12 @@ typedef struct Statement {
   } u;
 } Statement;
 
-typedef enum BinOp { LOR_BINOP, LXOR_BINOP, LAND_BINOP } BinOp;
-typedef enum UnOp { LNOT_UNOP } UnOp;
-
 struct Param;
 
 typedef struct Expression {
-  enum { BINOP_EXPR, UNOP_EXPR, ID_EXPR, TRUE_EXPR, FALSE_EXPR, CALL_EXPR } type;
+  ExpressionType type;
   union {
-    struct { struct Expression * left; enum BinOp binop; struct Expression * right; } binop_expr;
+    struct { struct Expression * left; BinOp binop; struct Expression * right; } binop_expr;
     struct { enum UnOp op; struct Expression * left; } unop_expr;
     struct { char * id; struct Param * params; } call_expr;
     char * id;
@@ -27,7 +47,7 @@ typedef struct Expression {
 } Expression;
 
 typedef struct Param {
-  enum { COMPOUND_PARAM, SIMPLE_PARAM } type;
+  ParamType type;
   union {
     struct { struct Param * param1, * param2; } compound_parm;
     Expression * expr;
