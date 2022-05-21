@@ -3,6 +3,7 @@
 #include "lexer.h"
 #include "parser.h"
 #include "abstract_syntax.h"
+#include "ast_printer.h"
 
 int main(int argc, char ** argv) {
   Statement * root = NULL;
@@ -19,6 +20,10 @@ int main(int argc, char ** argv) {
     }
   } else {
     yyparse(&root);
+  }
+
+  if (root != NULL) {
+    print_ast(root, root->type);
   }
   return 0;
 }
